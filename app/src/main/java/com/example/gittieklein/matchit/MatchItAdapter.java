@@ -1,13 +1,16 @@
 package com.example.gittieklein.matchit;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * Created by Gittie Klein on 1/3/2017.
  */
 
-public class MatchItAdapter extends RecyclerView.Adapter
+public class MatchItAdapter extends RecyclerView.Adapter<MatchItAdapter.ViewHolder>
 {
     private int[][] mCurrentBoard;
     private boolean[][] mIsMatch;
@@ -33,14 +36,19 @@ public class MatchItAdapter extends RecyclerView.Adapter
         }
     }
 
+    //TODO
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.rv_item, parent, false);
+        return new ViewHolder(itemLayoutView);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(ViewHolder holder, int position)
+    {
+        holder.mButton.setText(Integer.toString(position));
     }
 
     @Override
@@ -48,4 +56,14 @@ public class MatchItAdapter extends RecyclerView.Adapter
         return mCurrentBoard.length * mCurrentBoard[0].length;
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder
+    {
+        private final Button mButton;
+
+        public ViewHolder (View itemView)
+        {
+            super(itemView);
+            mButton = (Button) itemView.findViewById(R.id.button);
+        }
+    }
 }
