@@ -42,16 +42,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpBoard()
     {
-        boolean[][] isMatch = game.getIsMatch();
-        int[][] picture = game.getAllPictures();
+        boolean[] isMatch = game.getIsMatch();
+        int[] picture = game.getAllPictures();
 
         RecyclerView objRecyclerView = (RecyclerView) findViewById(R.id.board);
         objRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager objLayoutManager = new GridLayoutManager(this,picture[0].length);
+        RecyclerView.LayoutManager objLayoutManager = new GridLayoutManager(this,picture.length);
         objLayoutManager.setAutoMeasureEnabled(true);
 
-        mAdapter = new MatchItAdapter(picture, isMatch);
+        mAdapter = new MatchItAdapter(getApplicationContext(), picture, isMatch, R.drawable.ic_back);
 
         objRecyclerView.setLayoutManager(objLayoutManager);
         objRecyclerView.setAdapter(mAdapter);

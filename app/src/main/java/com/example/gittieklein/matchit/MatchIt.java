@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class MatchIt
 {
-    private boolean[][] isMatch;
-    private int[][] picture;
+    private boolean[] isMatch;
+    private int[] picture;
     private int numMatches;
     private int numTurns;
 
@@ -17,13 +17,12 @@ public class MatchIt
     //and based on that it will fill the array
     public MatchIt()
     {
-        isMatch = new boolean[5][4];
+        picture = new int[20];
+        isMatch = new boolean[20];
         for(int i = 0; i < isMatch.length;i++)
         {
-            for(int x = 0; x < isMatch[i].length; x++)
-            {
-                isMatch[i][x] = false;
-            }
+            isMatch[i] = false;
+
         }
 
         createFood();
@@ -48,35 +47,33 @@ public class MatchIt
         allpics[8] = R.drawable.ic_soup;
         allpics[9] = R.drawable.ic_strawberry;
         int count = 0;
-        for(int i = 0; i < picture.length;i++)
+        for(int i = 0; i < picture.length && count < allpics.length;i+=2)
         {
-            for(int x = 0; x < picture[i].length; x+=2)
-            {
-                picture[i][x] = allpics[count];
-                picture[i][x+1] = allpics[count];
-                count++;
-            }
+            picture[i] = allpics[count];
+            picture[i+1] = allpics[count];
+            count++;
+
         }
     }
 
     public void shuffle()
     {
         Random rand = new Random();
-        int row1, row2, col1, col2;
-        for(int i = 0; i < picture.length; i++) {
-            for (int x = 0; x < picture[i].length; x++) {
-                col1 = rand.nextInt(4);
-                row1 = rand.nextInt(5);
-                int temp = picture[i][x];
-                picture[i][x] = picture[row1][col1];
-                picture[row1][col1] = temp;
-            }
+        int temp;
+        int row;
+        for(int i = 0; i < picture.length; i++)
+        {
+            row = rand.nextInt(20);
+            temp = picture[i];
+            picture[i] = picture[row];
+            picture[row] = temp;
+
         }
     }
 
-    public int getPicture(int x, int y)
+    public int getPicture(int x)
     {
-        return picture[x][y];
+        return picture[x];
     }
 
     public boolean compare(int pic1, int pic2)
@@ -101,12 +98,12 @@ public class MatchIt
         return numTurns;
     }
 
-    public boolean[][] getIsMatch()
+    public boolean[] getIsMatch()
     {
         return isMatch;
     }
 
-    public int[][] getAllPictures()
+    public int[] getAllPictures()
     {
         return picture;
     }
