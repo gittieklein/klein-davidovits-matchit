@@ -3,6 +3,7 @@ package com.example.gittieklein.matchit;
 import java.util.Random;
 
 /**
+ * Matching Game Adapter for RecyclerView
  * Created by Gittie Klein on 1/3/2017.
  */
 
@@ -22,11 +23,9 @@ public class MatchIt
         for(int i = 0; i < isMatch.length;i++)
         {
             isMatch[i] = false;
-
         }
 
         createFood();
-
 
         shuffle();
 
@@ -35,28 +34,25 @@ public class MatchIt
     }
 
     private void createFood() {
-        int[] allpics = new int[10];
-        allpics[0] = R.drawable.ic_apple;
-        allpics[1] = R.drawable.ic_banana;
-        allpics[2] = R.drawable.ic_cheese;
-        allpics[3] = R.drawable.ic_chocolate;
-        allpics[4] = R.drawable.ic_egg;
-        allpics[5] = R.drawable.ic_hotdog;
-        allpics[6] = R.drawable.ic_popcorn;
-        allpics[7] = R.drawable.ic_sandwitch;
-        allpics[8] = R.drawable.ic_soup;
-        allpics[9] = R.drawable.ic_strawberry;
-        int count = 0;
-        for(int i = 0; i < picture.length && count < allpics.length;i+=2)
-        {
-            picture[i] = allpics[count];
-            picture[i+1] = allpics[count];
-            count++;
+        int[] allPics = new int[10];
+        allPics[0] = R.drawable.ic_apple;
+        allPics[1] = R.drawable.ic_banana;
+        allPics[2] = R.drawable.ic_cheese;
+        allPics[3] = R.drawable.ic_chocolate;
+        allPics[4] = R.drawable.ic_egg;
+        allPics[5] = R.drawable.ic_hotdog;
+        allPics[6] = R.drawable.ic_popcorn;
+        allPics[7] = R.drawable.ic_sandwitch;
+        allPics[8] = R.drawable.ic_soup;
+        allPics[9] = R.drawable.ic_strawberry;
 
+        for (int i = 0, count = 0; i < picture.length && count < allPics.length; i += 2, count++) {
+            picture[i] = allPics[count];
+            picture[i + 1] = allPics[count];
         }
     }
 
-    public void shuffle()
+    private void shuffle ()
     {
         Random rand = new Random();
         int temp;
@@ -106,5 +102,17 @@ public class MatchIt
     public int[] getAllPictures()
     {
         return picture;
+    }
+
+    public boolean isGameOver ()
+    {
+        boolean gameOver = false;
+
+        for (int i = 0; i < isMatch.length && !gameOver; i++) {
+            if (!isMatch[i]) {
+                gameOver = true;
+            }
+        }
+        return gameOver;
     }
 }
