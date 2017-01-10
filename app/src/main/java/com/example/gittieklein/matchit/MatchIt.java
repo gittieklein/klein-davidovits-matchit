@@ -106,13 +106,21 @@ public class MatchIt
 
     public boolean isGameOver ()
     {
-        boolean gameOver = false;
+//        boolean gameOver = false;
+//
+//        for (int i = 0; i < isMatch.length && !gameOver; i++) {
+//            if (!isMatch[i]) {
+//                gameOver = true;
+//            }
+//        }
+//        return gameOver;
+        if(numMatches * 2 == picture.length)
+            return true;
+        return false;
+    }
 
-        for (int i = 0; i < isMatch.length && !gameOver; i++) {
-            if (!isMatch[i]) {
-                gameOver = true;
-            }
-        }
-        return gameOver;
+    public void setIsMatch(int position)
+    {
+        isMatch[position] = true;
     }
 }

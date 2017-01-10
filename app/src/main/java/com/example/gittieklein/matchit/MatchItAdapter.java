@@ -35,8 +35,24 @@ public class MatchItAdapter extends RecyclerView.Adapter<MatchItAdapter.ViewHold
     {
         for(int i = 0; i < mData.length;i++)
         {
-            mData[i] = mDefaultCard;
+            if(!mIsMatch[i])
+                mData[i] = mDefaultCard;
+            else
+                mData[i] = mPictures[i];
         }
+    }
+
+    public int getPosition2 (int position1)
+    {
+        int position2=-1;
+        for (int i = 0; i < mData.length && position2 == -1; i++) {
+            if (mData[i] == mData[position1] && i !=position1)
+            {
+                position2 = i;
+            }
+        }
+
+        return position2;
     }
 
     /**

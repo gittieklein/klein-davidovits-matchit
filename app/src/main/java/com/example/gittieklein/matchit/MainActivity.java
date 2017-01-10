@@ -24,30 +24,40 @@ public class MainActivity extends AppCompatActivity {
      * This leaves the Adapter to handle the Model part of MVC, not View or Controller
      */
     private final MatchItAdapter.OIClickListener
-            listener = new MatchItAdapter.OIClickListener ()
-    {
-        public void onItemClick (int position, View view)
-        {
+            listener = new MatchItAdapter.OIClickListener() {
+        public void onItemClick(int position, View view) {
             // if the game is already over then there is nothing more to do here
-            if (mGameOver) {
-                Snackbar.make (mSbParentView, "Game over!", Snackbar.LENGTH_INDEFINITE).show ();
-            }
-            else {
-                if (mAdapter.getCurrentImageResourceAt (position) == R.drawable.ic_back) {
-                    mAdapter.showActualImageAt (position);
+            mImagesRevealed = 0;
+            if (game.isGameOver()) {
+                Snackbar.make(mSbParentView, "Game over!", Snackbar.LENGTH_INDEFINITE).show();
+            } else {
+                if (mAdapter.getCurrentImageResourceAt(position) == R.drawable.ic_back) {
+                    mAdapter.showActualImageAt(position);
                     mImagesRevealed++;
-
+                    int position2 = mAdapter.getPosition2(position);
+                    mImagesRevealed++;
+                    if (mImagesRevealed == 2) {
+                        boolean flag = game.compare(position, position2);
+                        if (flag) {
+                            game.setIsMatch(position);
+                            game.setIsMatch(position2);
+                        }
+                    }
+                    //if mimages=2
+                    // pass  two items to my compare
+                    // adapter will let you compare if the first reviled is same as 2
                     // TODO: if there are now two images revealed, check if they match
                     // TODO: if not, then hide both; if yes, they do then make them invisible:
                     //          by Setting isMatch[matchSquare1] and isMatch[matchSquare2] to true
                     //          and then calling mAdapter.notifyDataSetChanged ();
                     // TODO: Check for Game Over (i.e. if this was the last match): call game.isG.O.
-                }
-                else {      // otherwise, if this is NOT a back image then flip it back
-                    mAdapter.hideActualImageAt (position);
-                    mImagesRevealed--;
-                }
+//                }
+//                else {      // otherwise, if this is NOT a back image then flip it back
+//                    mAdapter.hideActualImageAt (position);
+//                    mImagesRevealed--;
+//                }
 
+                }
             }
         }
     };
@@ -59,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mSbParentView = findViewById (R.id.content_main);
+        mSbParentView = findViewById(R.id.content_main);
 
         startGame();
 
@@ -72,28 +82,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void startGame()
-    {
+    public void startGame() {
         mGameOver = false;
         mImagesRevealed = 0;
-        game = new MatchIt ();
+        game = new MatchIt();
         setUpBoard();
     }
 
-    private void setUpBoard()
-    {
+    private void setUpBoard() {
         boolean[] isMatch = game.getIsMatch();
         int[] picture = game.getAllPictures();
-        int columnsInGrid = (int) Math.sqrt (picture.length);
+        int columnsInGrid = (int) Math.sqrt(picture.length);
 
         RecyclerView objRecyclerView = (RecyclerView) findViewById(R.id.board);
         objRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager objLayoutManager = new GridLayoutManager (this, columnsInGrid);
+        RecyclerView.LayoutManager objLayoutManager = new GridLayoutManager(this, columnsInGrid);
         objLayoutManager.setAutoMeasureEnabled(true);
 
         mAdapter = new MatchItAdapter(getApplicationContext(), picture, isMatch, R.drawable.ic_back);
-        mAdapter.setOnItemClickListener (listener);
+        mAdapter.setOnItemClickListener(listener);
 
         objRecyclerView.setLayoutManager(objLayoutManager);
         objRecyclerView.setAdapter(mAdapter);
@@ -120,4 +128,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
