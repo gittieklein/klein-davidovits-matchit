@@ -123,4 +123,9 @@ public class MatchIt
     {
         isMatch[position] = true;
     }
+
+    public boolean isAlreadyHidden (int position)
+    {
+        return isMatch[position];
+    }
 }
