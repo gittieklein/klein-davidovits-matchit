@@ -129,7 +129,7 @@ public class MatchItAdapter extends RecyclerView.Adapter<MatchItAdapter.ViewHold
         currentButton.setImageResource (mCurrentBoard[position]);
 
         // Here is where we check isMatch to see if the button should be hidden
-        currentButton.setVisibility (mIsMatch[position] ? View.INVISIBLE : View.VISIBLE);
+        //currentButton.setVisibility (mIsMatch[position] ? View.INVISIBLE : View.VISIBLE);
     }
 
     public interface OIClickListener
