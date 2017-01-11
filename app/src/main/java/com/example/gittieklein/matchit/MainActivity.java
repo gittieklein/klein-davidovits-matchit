@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
 
     private void doGameOver ()
     {
-        Snackbar.make (mSbParentView, "Game over!", Snackbar.LENGTH_INDEFINITE).show ();
+        Snackbar.make (mSbParentView, "YOU WIN!", Snackbar.LENGTH_INDEFINITE).show ();
     }
 
     @Override

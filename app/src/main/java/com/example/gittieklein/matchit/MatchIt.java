@@ -25,7 +25,17 @@ public class MatchIt
             isMatch[i] = false;
         }
 
-        createFood();
+        //create a random number to create a random board
+        Random rand = new Random();
+        int val = rand.nextInt(4);
+        if(val == 0)
+            createFood();
+        else if (val == 1)
+            createSchool();
+        else if(val == 2)
+            createAnimal();
+        else
+            createTransport();
 
         shuffle();
 
@@ -45,6 +55,63 @@ public class MatchIt
         allPics[7] = R.drawable.ic_sandwitch;
         allPics[8] = R.drawable.ic_soup;
         allPics[9] = R.drawable.ic_strawberry;
+
+        for (int i = 0, count = 0; i < picture.length && count < allPics.length; i += 2, count++) {
+            picture[i] = allPics[count];
+            picture[i + 1] = allPics[count];
+        }
+    }
+
+    private void createSchool() {
+        int[] allPics = new int[10];
+        allPics[0] = R.drawable.ic_bag;
+        allPics[1] = R.drawable.ic_books;
+        allPics[2] = R.drawable.ic_stapler;
+        allPics[3] = R.drawable.ic_calculator;
+        allPics[4] = R.drawable.ic_crayons;
+        allPics[5] = R.drawable.ic_glue;
+        allPics[6] = R.drawable.ic_paint;
+        allPics[7] = R.drawable.ic_pencil;
+        allPics[8] = R.drawable.ic_ruler;
+        allPics[9] = R.drawable.ic_tape;
+
+        for (int i = 0, count = 0; i < picture.length && count < allPics.length; i += 2, count++) {
+            picture[i] = allPics[count];
+            picture[i + 1] = allPics[count];
+        }
+    }
+
+    private void createAnimal() {
+        int[] allPics = new int[10];
+        allPics[0] = R.drawable.ic_bird;
+        allPics[1] = R.drawable.ic_zebra;
+        allPics[2] = R.drawable.ic_rhino;
+        allPics[3] = R.drawable.ic_lion;
+        allPics[4] = R.drawable.ic_koala;
+        allPics[5] = R.drawable.ic_hippo;
+        allPics[6] = R.drawable.ic_fish;
+        allPics[7] = R.drawable.ic_cow;
+        allPics[8] = R.drawable.ic_dog;
+        allPics[9] = R.drawable.ic_tiger;
+
+        for (int i = 0, count = 0; i < picture.length && count < allPics.length; i += 2, count++) {
+            picture[i] = allPics[count];
+            picture[i + 1] = allPics[count];
+        }
+    }
+
+    private void createTransport() {
+        int[] allPics = new int[10];
+        allPics[0] = R.drawable.ic_bike;
+        allPics[1] = R.drawable.ic_train;
+        allPics[2] = R.drawable.ic_rocket;
+        allPics[3] = R.drawable.ic_schoolbus;
+        allPics[4] = R.drawable.ic_hotair;
+        allPics[5] = R.drawable.ic_helicopter;
+        allPics[6] = R.drawable.ic_car;
+        allPics[7] = R.drawable.ic_bus;
+        allPics[8] = R.drawable.ic_boat;
+        allPics[9] = R.drawable.ic_plane;
 
         for (int i = 0, count = 0; i < picture.length && count < allPics.length; i += 2, count++) {
             picture[i] = allPics[count];
